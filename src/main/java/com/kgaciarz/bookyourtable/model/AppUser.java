@@ -1,4 +1,6 @@
 package com.kgaciarz.bookyourtable.model;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,59 +8,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
+@Data
 @Entity
-public class AppUser implements UserDetails {
+@EqualsAndHashCode(callSuper = true)
+public class AppUser extends AppMainEntity implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
     private String username;
     private String password;
     private String email;
     private String role;
 
+    @OneToMany(mappedBy = "appUser")
+    private Set<AppReservation> reservations;
+
     public AppUser(String username, String password, String email, String role) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = role;
-    }
-
-    public AppUser(){
-
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
         this.role = role;
     }
 
