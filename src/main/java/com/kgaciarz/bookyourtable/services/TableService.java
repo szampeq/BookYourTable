@@ -1,4 +1,4 @@
-package com.kgaciarz.bookyourtable.manager;
+package com.kgaciarz.bookyourtable.services;
 
 
 import com.kgaciarz.bookyourtable.model.AppTable;
@@ -8,16 +8,15 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-public class TableManager {
+public class TableService {
 
     private AppTableRepo appTableRepo;
 
     @Autowired
-    public TableManager(AppTableRepo appTableRepo) {
+    public TableService(AppTableRepo appTableRepo) {
         this.appTableRepo = appTableRepo;
     }
 

@@ -67,11 +67,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @EventListener(ApplicationReadyEvent.class)
     public void get(){
-        /*
+
         AppUser appUserUser = new AppUser("Test", passwordEncoder().encode("UserTest"), "test@gmail.com", "ROLE_USER");
         AppUser appUserAdmin = new AppUser("AdminTest", passwordEncoder().encode("AdminTest"), "admin@gmail.com", "ROLE_ADMIN");
         appUserRepo.save(appUserUser);
         appUserRepo.save(appUserAdmin);
-        */
     }
 }

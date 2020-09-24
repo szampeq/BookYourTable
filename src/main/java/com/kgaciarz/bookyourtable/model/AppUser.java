@@ -30,6 +30,10 @@ public class AppUser extends AppMainEntity implements UserDetails {
         this.role = role;
     }
 
+    public AppUser(){
+
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(role));
