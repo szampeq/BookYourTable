@@ -17,10 +17,13 @@ public class AppUser extends AppMainEntity implements UserDetails {
 
     private String username;
     private String password;
+    private String name;
+    private String surname;
     private String email;
     private String role;
 
-    @OneToMany(mappedBy = "appUser")
+
+    @OneToMany(mappedBy = "user")
     private Set<AppReservation> reservations;
 
     public AppUser(String username, String password, String email, String role) {

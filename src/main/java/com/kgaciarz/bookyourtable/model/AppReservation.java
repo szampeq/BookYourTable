@@ -23,11 +23,11 @@ public class AppReservation extends AppMainEntity{
 
     @ManyToOne
     @JoinColumn(name = "apptable_id")
-    private AppTable appTable;
+    private AppTable table;
 
     @ManyToOne
     @JoinColumn(name = "appuser_id")
-    private AppUser appUser;
+    private AppUser user;
 
 
 }

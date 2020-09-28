@@ -38,7 +38,8 @@ public class TableService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void fillDB() {
-
+        save(new AppTable(1, 6));
+        save(new AppTable(2, 3));
     }
 
 }

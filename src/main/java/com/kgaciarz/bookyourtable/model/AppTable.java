@@ -15,9 +15,18 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class AppTable extends AppMainEntity{
 
+    private int number;
     private int seats;
 
-    @OneToMany(mappedBy = "appTable")
+    @OneToMany(mappedBy = "table")
     private Set<AppReservation> reservations;
 
+    public AppTable(int number, int seats){
+        this.number = number;
+        this.seats = seats;
+    }
+
+    public AppTable(){
+
+    }
 }
