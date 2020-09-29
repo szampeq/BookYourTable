@@ -11,11 +11,18 @@ import AddTable from './tables/AddTable';
 import ReservationList from './reservations/ReservationList';
 import AddReservation from './reservations/AddReservation';
 
+import logo from'./img/logo.png';
+
 export default class App extends React.Component {
   render(){
     return(
       <div>
-        <h1>Testowa Aplikacja Rezerwacji w Restauracji</h1>
+        <nav class="navbar">
+            <img  src={logo} alt="fireSpot" width="360" height="80"/>
+            <a href="localhost" class="navlink"> zaloguj </a>
+            <a href="localhost" class="navlink"> zarejestruj </a>
+        </nav>
+          <h1>Panel administratora</h1>
         <Router>
           <div>
             <ul>
@@ -42,6 +49,15 @@ export default class App extends React.Component {
             <Route path="/reservations/addReservation" component={AddReservation}/>
           </div>
         </Router>
+
+        <div class="grid-container">
+            <div class="info"></div>
+            <div class="steps"></div>
+            <div class="joinus"></div>
+
+
+        </div>
+
       </div>
     );
   }
