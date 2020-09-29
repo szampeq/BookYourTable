@@ -2,24 +2,55 @@
   text-align: center;
 }
 
-@media (min-width: 768px){
-.navbar {
-    border-radius: 0px;
-    background-color: #f5f0f0;
-}
-}
-
 .navlink{
   color: #000000;
 }
+
+.logo {
+  border-radius: 0px;
+  background-color: #ffffff;
+  min-height: 80px;
+  max-height: 80px;
+}
+
 
 .grid-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  gap: 1px 1px;
+  gap: 0px 0px;
   grid-template-areas:
-    "."
-    "."
-    ".";
+    "info"
+    "steps"
+    "joinus";
+}
+
+
+.info{
+  color: white;
+  background-color: #080a61;
+  background-image: url(./img/info.jpg);
+  min-height: 600px;
+  max-height: 600px;
+}
+
+.infobackground{
+  text-align: center;
+  font-size: 16px;
+  padding: 150px;
+}
+
+.steps{
+  background-color: #f5f0f0;
+}
+
+.joinus{
+  background-color: #080a61;
+}
+
+.footer{
+  background-color: #f5f0f0;
+  padding-top: 10px;
+  text-align: center;
+  color: #000000;
 }

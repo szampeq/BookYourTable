@@ -17,12 +17,40 @@ export default class App extends React.Component {
   render(){
     return(
       <div>
-        <nav class="navbar">
+        <div class="logo">
             <img  src={logo} alt="fireSpot" width="360" height="80"/>
             <a href="localhost" class="navlink"> zaloguj </a>
             <a href="localhost" class="navlink"> zarejestruj </a>
-        </nav>
-          <h1>Panel administratora</h1>
+        </div>
+
+        <div class="grid-container">
+
+            <div class="info">
+              <div class="infobackground">
+              <h1>Nowoczesny system rezerwacji stolików w restauracjach.</h1> <br></br><br></br>
+              Zarezerwuj stolik w jednej z Twoich ulubionych restauracji. <br></br>
+              Szybko, przejrzyście, wygodnie. <br></br>
+              Spróbuj, to nic nie kosztuje! Jesteśmy pewni, że zostaniesz z nami na dłużej! <br></br><br></br>
+              <h4>Prowadzisz restaurację? Dołącz do nas!</h4>
+              </div>
+
+            </div>
+
+            <div class="steps">
+
+            </div>
+
+            <div class="joinus">
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+             <h4>Krzysztof Gąciarz | Prototypowy system rezerwacji stolików w restauracjach</h4>
+        </div>
+
+        <h1>Panel administratora</h1>
         <Router>
           <div>
             <ul>
@@ -49,14 +77,6 @@ export default class App extends React.Component {
             <Route path="/reservations/addReservation" component={AddReservation}/>
           </div>
         </Router>
-
-        <div class="grid-container">
-            <div class="info"></div>
-            <div class="steps"></div>
-            <div class="joinus"></div>
-
-
-        </div>
 
       </div>
     );
