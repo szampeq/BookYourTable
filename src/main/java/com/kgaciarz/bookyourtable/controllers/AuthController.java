@@ -1,7 +1,18 @@
 package com.kgaciarz.bookyourtable.controllers;
 
 
+import com.kgaciarz.bookyourtable.model.ERole;
+import com.kgaciarz.bookyourtable.model.Role;
+import com.kgaciarz.bookyourtable.model.User;
+import com.kgaciarz.bookyourtable.payload.request.LoginRequest;
+import com.kgaciarz.bookyourtable.payload.request.SignUpRequest;
+import com.kgaciarz.bookyourtable.payload.response.JwtResponse;
+import com.kgaciarz.bookyourtable.payload.response.MessageResponse;
 import com.kgaciarz.bookyourtable.repo.AppUserRepo;
+import com.kgaciarz.bookyourtable.repo.RoleRepository;
+import com.kgaciarz.bookyourtable.repo.UserRepository;
+import com.kgaciarz.bookyourtable.security.jwt.JwtUtils;
+import com.kgaciarz.bookyourtable.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +22,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @CrossOrigin
@@ -22,10 +37,10 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-    AppUserRepo userRepo;
+    UserRepository userRepository;
 
     @Autowired
-    AppRoleRepp roleRepo;
+    RoleRepository roleRepository;
 
     @Autowired
     PasswordEncoder encoder;
