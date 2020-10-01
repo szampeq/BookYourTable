@@ -99,7 +99,7 @@
   display: block;
 }
 
-.registerbutton:hover, registerbutton:active, buttonnav:hover, buttonnav:active{
+.registerbutton:hover, .registerbutton:active, .buttonnav:hover, .buttonnav:active{
   background-color: #e56806;
 }
 

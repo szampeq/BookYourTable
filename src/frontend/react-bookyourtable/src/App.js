@@ -71,7 +71,7 @@ export default class App extends React.Component {
             </div>
 
             <div class="joinus">
-              <h2>Głodny? Nie czekaj, zapraszamy!</h2>
+              <h2>Zapraszamy do skorzystania z naszego serwisu!</h2>
               <a href="rejestruj" target="_blank" class="registerbutton">Rejestracja</a>
             </div>
 
