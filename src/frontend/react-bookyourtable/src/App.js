@@ -1,116 +1,131 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
-import './App.css';
-import UserList from './users/UserList';
-import TableList from './tables/TableList';
-import AddTable from './tables/AddTable';
-import ReservationList from './reservations/ReservationList';
-import AddReservation from './reservations/AddReservation';
+import React, { Component } from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-import logo from'./img/logo.png';
-import usericon from './img/user-icon.png';
-import restauranticon from './img/restaurant-icon.png';
-import reservationicon from './img/reservation-icon.png';
+import AuthService from "./services/auth.service";
 
-export default class App extends React.Component {
-  render(){
-    return(
+import Login from "./components/login.component";
+import Register from "./components/register.component";
+import Home from "./components/home.component";
+import Profile from "./components/profile.component";
+import BoardUser from "./components/board-user.component";
+import BoardModerator from "./components/board-moderator.component";
+import BoardAdmin from "./components/board-admin.component";
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+
+    this.state = {
+      showModeratorBoard: false,
+      showAdminBoard: false,
+      currentUser: undefined,
+    };
+  }
+
+  componentDidMount() {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      this.setState({
+        currentUser: user,
+        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+      });
+    }
+  }
+
+  logOut() {
+    AuthService.logout();
+  }
+
+  render() {
+    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+
+    return (
       <div>
-        <div class="logo">
-            <img  src={logo} alt="fireSpot" width="270" height="60"/>
-            <a href="rejestruj" target="_blank" class="buttonnav"> nie masz konta? zarejestruj się!</a>
-            <a href="loguj" target="_blank" class="buttonnav">zaloguj się </a>
-        </div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <Link to={"/"} className="navbar-brand">
+            bookyourtable
+          </Link>
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/home"} className="nav-link">
+                Home-GuestSite
+              </Link>
+            </li>
 
-        <div class="grid-container">
-
-            <div class="info">
-              <div class="infobackground">
-              <h1>Nowoczesny system rezerwacji stolików w restauracjach</h1> <br></br><br></br>
-              Zarezerwuj stolik w jednej z Twoich ulubionych restauracji. <br></br>
-              Szybko, przejrzyście, wygodnie. <br></br>
-              Spróbuj, to nic nie kosztuje! Jesteśmy pewni, że zostaniesz z nami na dłużej! <br></br><br></br>
-              <h4>Prowadzisz restaurację? Dołącz do nas!</h4>
-              </div>
-            </div>
-
-            <div class="steps">
-            <div class="infosteps">
-              <h2>Rezerwacja stolika w 3 prostych krokach!</h2> <br></br><br></br><br></br><br></br>
-
-              <div class="rows">
-
-                  <div class="stepscontent">
-                    <img  src={usericon} alt="fireSpot"/>
-                  <h4>Rejestracja</h4> <br></br>
-                  Założenie konta pozwoli Ci na dokonywanie rezerwacji. Rejestracja jest szybka i intuicyjna.
-                  Warto poświęcić na nią te kilka minut.
-                  </div>
-
-                  <div class="stepscontent">
-                    <img  src={restauranticon} alt="fireSpot"/>
-                  <h4>Wybór restauracji</h4><br></br>
-                  Wybierz swoją ulubioną restaurację lub poszukaj czegoś nowego.
-                  Na pewno znajdziesz coś dla siebie!
-                  </div>
-
-                  <div class="stepscontent">
-                    <img  src={reservationicon} alt="fireSpot"/>
-                  <h4>Rezerwacja stolika</h4><br></br>
-                  Już prawie gotowe! Pozostało wybrać datę oraz stolik na odpowiednią ilość osób.
-                  To wszystko, smacznego!
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-
-            <div class="joinus">
-              <h2>Zapraszamy do skorzystania z naszego serwisu!</h2>
-              <a href="rejestruj" target="_blank" class="registerbutton">Rejestracja</a>
-            </div>
-
-        </div>
-
-        <div class="footer">
-             <h4>Krzysztof Gąciarz | Prototypowy system rezerwacji stolików w restauracjach</h4>
-        </div>
-
-        <h1>Panel administratora</h1>
-        <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/users/userList">Lista użytkowników</Link>
+            {showModeratorBoard && (
+              <li className="nav-item">
+                <Link to={"/mod"} className="nav-link">
+                  Moderator Board
+                </Link>
               </li>
-              <li>
-                <Link to="/tables/tableList">Lista stolików</Link>
+            )}
+
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/admin"} className="nav-link">
+                  Admin Board
+                </Link>
               </li>
-              <li>
-                <Link to="/tables/addTable">Dodaj stolik</Link>
+            )}
+
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  User
+                </Link>
               </li>
-              <li>
-                <Link to="/reservations/reservationList">Lista rezerwacji</Link>
-              </li>
-              <li>
-                <Link to="/reservations/addReservation">Dodaj rezerwację</Link>
-              </li>
-            </ul>
-            <Route path="/users/userlist" component={UserList}/>
-            <Route path="/tables/tablelist" component={TableList}/>
-            <Route path="/tables/addTable" component={AddTable}/>
-            <Route path="/reservations/reservationList" component={ReservationList}/>
-            <Route path="/reservations/addReservation" component={AddReservation}/>
+            )}
           </div>
-        </Router>
 
+          {currentUser ? (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/profile"} className="nav-link">
+                  {currentUser.username}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={this.logOut}>
+                  LogOut
+                </a>
+              </li>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/register"} className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+            </div>
+          )}
+        </nav>
+
+        <div className="container mt-3">
+          <Switch>
+            <Route exact path={["/", "/home"]} component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/profile" component={Profile} />
+            <Route path="/user" component={BoardUser} />
+            <Route path="/mod" component={BoardModerator} />
+            <Route path="/admin" component={BoardAdmin} />
+          </Switch>
+        </div>
       </div>
     );
   }
 }
 
+export default App;
