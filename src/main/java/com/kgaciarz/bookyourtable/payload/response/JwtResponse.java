@@ -18,7 +18,6 @@ public class JwtResponse {
         this.roles = roles;
     }
 
-
     public String getAccessToken() {
         return token;
     }
@@ -43,14 +42,6 @@ public class JwtResponse {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -59,11 +50,15 @@ public class JwtResponse {
         this.email = email;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public List<String> getRoles() {
+        return roles;
     }
 }
