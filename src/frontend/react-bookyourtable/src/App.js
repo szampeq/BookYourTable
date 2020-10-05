@@ -12,6 +12,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
+import logo from'./img/logo.png';
 
 class App extends Component {
   constructor(props) {
@@ -46,9 +47,9 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-light bg-light">
           <Link to={"/"} className="navbar-brand">
-              bookyourtable
+              <img  src={logo} alt="logo" width="210" height="45"/>
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -91,7 +92,7 @@ class App extends Component {
               </li>
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
+                  wyloguj się
                 </a>
               </li>
             </div>
@@ -99,20 +100,19 @@ class App extends Component {
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
-                  Login
+                  | zaloguj się
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link to={"/register"} className="nav-link">
-                  Sign Up
+                  | zarejestruj się
                 </Link>
               </li>
             </div>
           )}
         </nav>
 
-        <div className="container mt-3">
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
@@ -122,8 +122,14 @@ class App extends Component {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
           </Switch>
+
+          <div class="footer">
+             <h4>Krzysztof Gąciarz | Prototypowy system rezerwacji stolików w restauracjach</h4>
         </div>
-      </div>
+
+        </div>
+
+        
     );
   }
 }
