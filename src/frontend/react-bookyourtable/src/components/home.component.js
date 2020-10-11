@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
 import UserService from "../services/user.service";
+import AuthService from "../services/auth.service";
+
 import usericon from '../img/user-icon.png';
 import restauranticon from '../img/restaurant-icon.png';
 import reservationicon from '../img/reservation-icon.png';
@@ -10,11 +12,23 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-      content: ""
+      content: "",
+      showGuestBoard: false,
+      currentUser: undefined,
     };
   }
 
   componentDidMount() {
+
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      this.setState({
+        currentUser: user,
+        showGuestBoard: !user.roles.includes("ROLE_MODERATOR")
+      });
+    }
+
     UserService.getPublicContent().then(
       response => {
         this.setState({
@@ -33,11 +47,15 @@ export default class Home extends Component {
   }
 
   render() {
+    const { currentUser, showGuestBoard } = this.state;
     return (
         <header className="home">
 
-          <div class="grid-container">
 
+        {currentUser ? (
+              <h1>user</h1>
+        ) : (
+<div class="grid-container">
       <div class="info">
         <div class="infobackground">
         <h1>Nowoczesny system rezerwacji stolików w restauracjach</h1> <br></br><br></br>
@@ -86,6 +104,9 @@ export default class Home extends Component {
       </div>
 
 </div>
+        )};
+
+
         </header>
       
     );
