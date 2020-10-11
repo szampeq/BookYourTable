@@ -13,7 +13,6 @@ export default class Home extends Component {
 
     this.state = {
       content: "",
-      showGuestBoard: false,
       currentUser: undefined,
     };
   }
@@ -47,14 +46,14 @@ export default class Home extends Component {
   }
 
   render() {
-    const { currentUser, showGuestBoard } = this.state;
+    const { currentUser } = this.state;
     return (
         <header className="home">
 
 
-        {currentUser ? (
+        {currentUser ? ( //user content
               <h1>user</h1>
-        ) : (
+        ) : ( //guest welcome content
 <div class="grid-container">
       <div class="info">
         <div class="infobackground">
@@ -105,7 +104,6 @@ export default class Home extends Component {
 
 </div>
         )};
-
 
         </header>
       
